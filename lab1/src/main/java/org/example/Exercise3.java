@@ -29,8 +29,15 @@ public class Exercise3 {
         int[] result = new int[number1.length];
         int borrow = 0;
 
-        for (int i = number1.length - 1; i >= 0; i--) {
-            int diff = number1[i] - number2[i] - borrow;
+        int index = 0;
+        while(number1[index] >= number2[index]) {
+            int[] auxNumber = Arrays.copyOf(number1, number1.length);
+            number1 = Arrays.copyOf(number2, number2.length);
+            number2 = Arrays.copyOf(auxNumber, auxNumber.length);
+        }
+
+        for (index = number1.length - 1; index >= 0; --index) {
+            int diff = number1[index] - number2[index] - borrow;
 
             if (diff < 0) {
                 diff += 10;
@@ -39,7 +46,7 @@ public class Exercise3 {
                 borrow = 0;
             }
 
-            result[i] = diff;
+            result[index] = diff;
         }
 
         return result;
